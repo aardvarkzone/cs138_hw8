@@ -1,4 +1,4 @@
-alphabet: {0, 1, _, x}
+alphabet: {0, 1, x}
 start: q0
 
 q0 (0 -> x,R q1) (_ -> _,L reject)
