@@ -1,0 +1,53 @@
+alphabet: {0, 1, #}
+
+def Main {
+    SplitOnHash()
+    PushToStack()
+    CheckBinary()
+    PopFromStack()
+    CheckBinary()
+    PushToStack()
+    Increment()
+    PopFromStack()
+    Compare()
+    accept
+}
+
+def SplitOnHash [[
+    q0: 0 -> (q0, 0, R)
+    q0: 1 -> (q0, 1, R)
+    q0: # -> (q1, _, R)
+    q1: 0 -> (q1, 0, R)
+    q1: 1 -> (q1, 1, R)
+    q1: _ -> (q2, _, S)
+]]
+
+def CheckBinary [[
+    q0: 0 -> (q0, 0, R)
+    q0: 1 -> (q0, 1, R)
+    q0: _ -> (q1, _, S)
+    q1: 0 -> (q1, 0, L)
+    q1: 1 -> (q1, 1, L)
+    q1: _ -> (q2, _, S)
+]]
+
+def Increment [[
+    q0: 0 -> (q1, 1, S)
+    q0: 1 -> (q0, 0, L)
+    q0: _ -> (q1, 1, S)
+    q1: _ -> (q2, _, S)
+]]
+
+def Compare [[
+    q0: 0 -> (q0, 0, R)
+    q0: 1 -> (q0, 1, R)
+    q0: _ -> (q1, _, R)
+    q1: 0 -> (q2, 0, S)
+    q1: 1 -> (q3, 1, S)
+    q2: 0 -> (q2, 0, S)
+    q2: 1 -> reject
+    q3: 0 -> reject
+    q3: 1 -> (q3, 1, S)
+    q2: _ -> accept
+    q3: _ -> accept
+]]
